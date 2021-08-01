@@ -70,7 +70,7 @@ app.get('/', async function (req, res) {
       res.end(
         html.replace(
           '<MESSAGE>',
-          `<h3>You are a new user with id ${id}</h3> If this is not the first time visiting this site and haven't cleared your ban, you just bypassed the system! Your status has now been changed to 'banned'.`
+          `<h3>You are a new user with id ${id}</h3> If this is not the first time visiting this site and haven't cleared your ban, you just bypassed the system! Your status has now been changed to 'banned'. Refresh the page once you have read this message.`
         )
       );
     } else {
