@@ -1,6 +1,7 @@
 {
   "name": "ban-tracker",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -8,5 +9,10 @@
     "start": "node server.js"
   },
   "author": "Bricktech2000",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "geoip-lite": "^1.4.2",
+    "ua-parser-js": "^0.7.28"
+  }
 }
