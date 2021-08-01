@@ -83,7 +83,7 @@ app.get('/', async function (req, res) {
     }
   }
 
-  console.log(db);
+  // console.log(db);
 });
 
 //count differences between all values of two objects
