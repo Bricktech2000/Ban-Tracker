@@ -4,7 +4,9 @@ import uaparser from 'ua-parser-js';
 const app = express();
 
 const port = 80;
+const threshold = 8;
 
+var db = {};
 app.get('/', async function (req, res) {
   //https://www.npmjs.com/package/ua-parser-js
   //https://github.com/geoip-lite/node-geoip
@@ -14,18 +16,41 @@ app.get('/', async function (req, res) {
   var { ua, ...rest } = uaparser(req.headers['user-agent']);
   var ua = rest;
 
-  //include: city, timezone, ll
-  var { city, timezone, ll, ...rest } = geoip.lookup(
+  //include: region, city, timezone, ll
+  var { region, city, timezone, ll, ...rest } = geoip.lookup(
     req.connection.remoteAddress
   );
-  var ip = { city, timezone, ll };
+  var ip = { region, city, timezone, ll };
 
   //combine ip and ua
   var obj = { ua, ip };
 
-  var result = compareValues(obj, obj);
-  console.log(result);
-  res.end('Hello World');
+  var id = null;
+  Object.entries(db).forEach(([key, objs]) => {
+    for (var obj2 of objs) {
+      var result = compareValues(obj, obj2);
+      if (result == 0) {
+        id = key;
+        return;
+      }
+    }
+    for (var obj2 of objs) {
+      var result = compareValues(obj, obj2);
+      if (result <= threshold) {
+        db[key].push(obj);
+        id = key;
+        return;
+      }
+    }
+  });
+
+  if (id === null) {
+    id = genRandomHex(256 / 16);
+    db[id] = [obj];
+  }
+
+  console.log(db);
+  res.end('Ban Tracker');
 });
 
 //count differences between all values of two objects
@@ -37,6 +62,13 @@ function compareValues(obj1, obj2) {
     (acc, key) => acc + compareValues(obj1[key], obj2[key]),
     0
   );
+}
+
+//https://stackoverflow.com/questions/58325771/how-to-generate-random-hex-string-in-javascript
+function genRandomHex(size) {
+  return [...Array(size)]
+    .map(() => Math.floor(Math.random() * 16).toString(16))
+    .join('');
 }
 
 app.listen(port, () => {
