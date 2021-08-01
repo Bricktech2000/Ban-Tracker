@@ -44,13 +44,46 @@ app.get('/', async function (req, res) {
     }
   });
 
-  if (id === null) {
-    id = genRandomHex(256 / 16);
-    db[id] = [obj];
+  if (typeof req.query.clear !== 'undefined') {
+    delete db[id];
+    res.redirect('/');
+  } else {
+    var html = `
+    <body>
+      <h1><a href="https://github.com/Bricktech2000/Ban-Tracker" target="_blank" rel="noreferrer">Ban Tracker</a></h1>
+      <p>This program is ment to track bans very aggressively. Try to bypass it!</p>
+      <p>
+        Here are a few ideas to try to do:
+        <ul>
+          <li>Use a VPN</li>
+          <li>Clear your cookies</li>
+          <li>Use a different browser</li>
+          <li>Use a different device</li>
+        </ul>
+      </p>
+      <p><MESSAGE></p>
+    </body>
+    `;
+    if (id === null) {
+      id = genRandomHex(256 / 16);
+      db[id] = [obj];
+      res.end(
+        html.replace(
+          '<MESSAGE>',
+          `<h3>You are a new user with id ${id}</h3> If this is not the first time visiting this site and haven't cleared your ban, you just bypassed the system! Your status has now been changed to 'banned'.`
+        )
+      );
+    } else {
+      res.end(
+        html.replace(
+          '<MESSAGE>',
+          `<h3>You are a known user with id ${id}</h3> Your status is still 'banned' and you haven't bypassed the system. <a href="?clear">Simulate a ban appeal</a>`
+        )
+      );
+    }
   }
 
   console.log(db);
-  res.end('Ban Tracker');
 });
 
 //count differences between all values of two objects
