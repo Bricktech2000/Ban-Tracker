@@ -57,6 +57,7 @@ app.get('/', async function (req, res) {
         <ul>
           <li>Use a VPN</li>
           <li>Clear your cookies</li>
+          <li>Go to a private/incognito window</li>
           <li>Use a different browser</li>
           <li>Use a different device</li>
         </ul>
@@ -70,14 +71,14 @@ app.get('/', async function (req, res) {
       res.end(
         html.replace(
           '<MESSAGE>',
-          `<h3>You are a new user with id ${id}</h3> If this is not the first time visiting this site and haven't cleared your ban, you just bypassed the system! Your status has now been changed to 'banned'. Refresh the page once you have read this message.`
+          `<h3>You are a new user<br>ID: ${id}</h3> If this is not the first time visiting this site and haven't cleared your ban, you just bypassed the system! Your status has now been changed to 'banned'. Refresh the page once you have read this message.`
         )
       );
     } else {
       res.end(
         html.replace(
           '<MESSAGE>',
-          `<h3>You are a known user with id ${id}</h3> Your status is still 'banned' and you haven't bypassed the system. <a href="?clear">Simulate a ban appeal</a>`
+          `<h3>You are a known user<br>ID: ${id}</h3> Your status is still 'banned' and you haven't bypassed the system. <a href="?clear">Simulate a ban appeal</a>`
         )
       );
     }
