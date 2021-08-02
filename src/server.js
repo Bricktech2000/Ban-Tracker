@@ -17,9 +17,8 @@ app.get('/', async function (req, res) {
   var ua = rest;
 
   //include: region, city, timezone, ll
-  var { region, city, timezone, ll, ...rest } = geoip.lookup(
-    req.connection.remoteAddress
-  );
+  var { region, city, timezone, ll, ...rest } =
+    geoip.lookup(req.connection.remoteAddress) || {};
   var ip = { region, city, timezone, ll };
 
   //combine ip and ua
