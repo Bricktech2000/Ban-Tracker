@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 const port = 90;
-const threshold = 8;
+const threshold = 7;
 const cookieName = '_ban_tracker_id';
 
 var db = {};
