@@ -30,7 +30,7 @@ app.get('/', async function (req, res) {
   ck.ck1 = req.cookies[cookieName] || '';
   ck.ck2 = ck.ck1;
 
-  //combine ip and ua
+  //combine ip, ua and ck
   var obj = { ua, ip, ck };
 
   var id = null;
