@@ -34,23 +34,17 @@ app.get('/', async function (req, res) {
   var obj = { ua, ip, ck };
 
   var id = null;
-  Object.entries(db).forEach(([key, objs]) => {
-    for (var obj2 of objs) {
-      var result = compareValues(obj, obj2);
-      if (result == 0) {
-        id = key;
-        return;
-      }
-    }
-    for (var obj2 of objs) {
-      var result = compareValues(obj, obj2);
-      if (result <= threshold) {
-        db[key].push(obj);
-        id = key;
-        return;
-      }
-    }
-  });
+  var diff = Object.fromEntries(
+    Object.entries(db).map(([key, objs]) => [
+      key,
+      Math.min(...objs.map((obj2) => compareValues(obj, obj2))),
+    ])
+  );
+  //https://stackoverflow.com/questions/27376295/getting-key-with-the-highest-value-from-object
+  var id = Object.keys(diff).reduce(
+    (a, b) => (diff[a] > diff[b] ? a : b),
+    null
+  );
 
   if (typeof req.query.clear !== 'undefined') {
     delete db[id];
@@ -75,17 +69,18 @@ app.get('/', async function (req, res) {
       <p><MESSAGE></p>
     </body>
     `;
-    if (id === null) {
+    if (diff[id] <= threshold) {
+      if (diff[id] > 0) db[id].push(obj);
+      html = html.replace(
+        '<MESSAGE>',
+        `<h3>You are a known user<br>ID: ${id}</h3> Your status is still 'banned' and you haven't bypassed the system. <a href="?clear">Simulate a ban appeal</a>`
+      );
+    } else {
       id = genRandomHex(256 / 16);
       db[id] = [obj];
       html = html.replace(
         '<MESSAGE>',
         `<h3>You are a new user<br>ID: ${id}</h3> If this is not the first time visiting this site and haven't cleared your ban, you just bypassed the system! Your status has now been changed to 'banned'. Refresh the page once you have read this message.`
-      );
-    } else {
-      html = html.replace(
-        '<MESSAGE>',
-        `<h3>You are a known user<br>ID: ${id}</h3> Your status is still 'banned' and you haven't bypassed the system. <a href="?clear">Simulate a ban appeal</a>`
       );
     }
     res.cookie(cookieName, id, {
