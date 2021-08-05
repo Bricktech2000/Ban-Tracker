@@ -4,7 +4,7 @@ import UserID from '../components/UserID.js';
 
 import styles from '../components/Home.module.css';
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className={styles.Home}>
       <Head>
@@ -22,7 +22,7 @@ export default function Home() {
         </p>
         <p>
           <h2>Your User ID</h2>
-          <UserID id={0} />
+          <UserID id={props.id} />
         </p>
         <p>
           If you believe you have the skills required, here are a few ideas on
@@ -44,7 +44,6 @@ export default function Home() {
 import getUserID from '../components/getUserID';
 export async function getServerSideProps({ req, res }) {
   var id = getUserID(req, res, 7);
-  console.log(id);
   return {
     props: { id: id },
   };
