@@ -1,7 +1,4 @@
-const http = require('http');
-const { parse } = require('url');
 const next = require('next');
-const fs = require('fs');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
