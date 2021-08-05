@@ -6,7 +6,7 @@ const app = express();
 
 const port = 90;
 const threshold = 7;
-const cookieName = '_ban_tracker_id';
+const cookieName = '_user_tracker_id';
 
 var db = {};
 app.use(cookieParser());
@@ -54,7 +54,7 @@ app.get('/', async function (req, res) {
   } else {
     var html = `
     <body>
-      <h1><a href="https://github.com/Bricktech2000/Ban-Tracker" target="_blank" rel="noreferrer">Ban Tracker</a></h1>
+      <h1><a href="https://github.com/Bricktech2000/User-Tracker" target="_blank" rel="noreferrer">User Tracker</a></h1>
       <p>This program is ment to track bans very aggressively. Try to bypass it!</p>
       <p>
         Here are a few ideas to try to do:

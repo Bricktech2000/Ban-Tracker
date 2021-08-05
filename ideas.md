@@ -1,8 +1,8 @@
-# Ban Tracker
+# User Tracker
 
 ## ideas
 
-- create an aggressive ban tracker
+- create an aggressive user tracker
 - assumption: when trying to escape a ban, most people will try only one measure at a time:
   - use a VPN
   - clear browsing data
