@@ -5,19 +5,19 @@
   "scripts": {
     "_dev1": "https://nextjs.org/docs/advanced-features/debugging",
     "_dev2": "https://stackoverflow.com/questions/53948521/node-options-is-not-recognized-as-an-internal-or-external-command",
-    "dev": "cross-env NODE_OPTIONS='--trace-warnings' next dev -p 90",
+    "dev": "cross-env NODE_ENV='development' node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV='production' node server.js",
     "lint": "next lint"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "geoip-lite": "^1.4.2",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "cookie-parser": "^1.4.5",
-    "express": "^4.17.1",
-    "geoip-lite": "^1.4.2",
     "ua-parser-js": "^0.7.28"
   },
   "devDependencies": {
