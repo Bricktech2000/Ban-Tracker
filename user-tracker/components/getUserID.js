@@ -15,8 +15,8 @@ export default function getUserID(req, res, threshold) {
   var ua = rest;
 
   //include: region, city, timezone, ll
-  var { region, city, timezone, ll, ...rest } = {};
-  // geoip.lookup(req.connection.remoteAddress) || {};
+  var { region, city, timezone, ll, ...rest } =
+    geoip.lookup(req.connection.remoteAddress) || {};
   var ip = { region, city, timezone, ll };
 
   //include cookie (and double its weight)
