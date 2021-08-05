@@ -26,6 +26,6 @@ body {
 }
 
 ::selection {
-  background: var(--text);
+  background: var(--title);
   color: var(--black);
 }
