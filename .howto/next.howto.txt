@@ -1,0 +1,12 @@
+src: 
+install next:
+npx create-next-app user-tracker
+
+change port:
+src: https://flaviocopes.com/nextjs-change-app-port/
+in package.json:
+replace: next dev for: next dev -p 90
+
+run app:
+cd user-tracker
+npm run dev
