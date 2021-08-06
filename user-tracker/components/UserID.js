@@ -9,7 +9,7 @@ class UserID extends Component {
       <div
         className={styles.UserID}
         style={{
-          background: `hsl(${parseInt(this.props.id) % 360}, 100%, 60%)`,
+          background: `hsl(${parseInt(this.props.id) % 360}, 70%, 50%)`,
         }}
       >
         {this.props.id}
