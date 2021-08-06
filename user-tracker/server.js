@@ -3,7 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const port = 90;
-const dev = process.env.NODE_ENV !== 'production';
+const dev = process.env.NODE_ENV === 'development';
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
