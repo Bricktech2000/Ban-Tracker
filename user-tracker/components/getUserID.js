@@ -10,9 +10,11 @@ export default function getUserID(req, res, threshold) {
   //https://stackoverflow.com/questions/17781472/how-to-get-a-subset-of-a-javascript-objects-properties
   //https://stackoverflow.com/questions/3393854/get-and-set-a-single-cookie-with-node-js-http-server
 
-  //exclude: ua
-  var { ua, ...rest } = uaparser(req.headers['user-agent']);
-  var ua = rest;
+  //exclude: ua, engine, browser
+  var { ua, engine, browser, ...rest } = uaparser(req.headers['user-agent']);
+  //include: browser.name, browser.version
+  browser = { name: browser.name, version: browser.version };
+  var ua = { ...rest, browser };
 
   //include: region, city, timezone, ll
   var { region, city, timezone, ll, ...rest } =
@@ -36,9 +38,11 @@ export default function getUserID(req, res, threshold) {
   );
   //https://stackoverflow.com/questions/27376295/getting-key-with-the-highest-value-from-object
   var id = Object.keys(diff).reduce(
-    (a, b) => (diff[a] > diff[b] ? a : b),
+    (a, b) => (diff[a] < diff[b] ? a : b),
     null
   );
+
+  // console.log(obj, id, db, diff[id]);
   if (diff[id] <= threshold) {
     if (diff[id] > 0) db[id].push(obj);
   } else {
