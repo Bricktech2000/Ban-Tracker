@@ -1,0 +1,33 @@
+.Home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  width: 100vw;
+  padding: 2em;
+  font-size: 1.5em;
+}
+
+.Home main {
+  width: 75ch;
+  max-width: 100%;
+}
+
+.Home main div {
+  margin: 1em 0;
+}
+
+.Home main ul {
+  margin-left: 3em;
+}
+
+.Home h1,
+.Home h2 {
+  color: var(--title);
+  font-weight: bold;
+}
+
+.Home h1 {
+  font-size: 3em;
+}

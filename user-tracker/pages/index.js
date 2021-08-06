@@ -13,18 +13,18 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <h1>User Tracker</h1>
-        <p>
+        <div>
           This program is ment to track users very aggressively without using
           any client-side logic. Your goal is to trick the server into assigning
           you a new <i>User ID</i>
-        </p>
-        <p>
+        </div>
+        <div>
           <h2>Your User ID</h2>
           <UserID id={props.id} />
-        </p>
-        <p>
+        </div>
+        <div>
           If you believe you have the skills required, here are a few ideas on
           how to do so:
           <ul>
@@ -34,7 +34,7 @@ export default function Home(props) {
             <li>Use a different browser</li>
             <li>Use a different device</li>
           </ul>
-        </p>
+        </div>
       </main>
     </div>
   );
