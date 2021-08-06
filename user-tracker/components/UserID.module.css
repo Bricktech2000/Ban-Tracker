@@ -3,6 +3,7 @@
   padding: 1em 1.5em;
   border-radius: 0.5em;
 
-  font-weight: bold;
+  font-weight: bolder;
+  font-family: Consolas, 'Courier New', Courier;
   color: var(--black);
 }
