@@ -25,9 +25,9 @@ export default function Home(props) {
           <UserID id={props.id} />
         </div>
         <div>
-          Here are a few ideas to get you started:
+          <h2>A Few Ideas to Get You Started</h2>
           <ul>
-            <li>Use a VPN</li>
+            <li>Use a VPN or a proxy</li>
             <li>Clear your cookies</li>
             <li>Go to a private/incognito window</li>
             <li>Use a different browser</li>
