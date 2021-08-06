@@ -18,15 +18,14 @@ export default function Home(props) {
         <div>
           This program is ment to track users very aggressively without using
           any client-side logic. Your goal is to trick the server into assigning
-          you a new <i>User ID</i>
+          you a new <i>User ID</i>.
         </div>
         <div>
           <h2>Your User ID</h2>
           <UserID id={props.id} />
         </div>
         <div>
-          If you believe you have the skills required, here are a few ideas on
-          how to do so:
+          Here are a few ideas to get you started:
           <ul>
             <li>Use a VPN</li>
             <li>Clear your cookies</li>
