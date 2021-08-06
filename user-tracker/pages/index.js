@@ -10,7 +10,7 @@ export default function Home(props) {
       <Head>
         <title>User Tracker</title>
         <meta name="description" content="" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon.png" />
       </Head>
 
       <main>
