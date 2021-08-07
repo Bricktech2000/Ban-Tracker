@@ -1,10 +1,12 @@
 import geoip from 'geoip-lite';
 import uaparser from 'ua-parser-js';
+import { promises as fs } from 'fs';
 
 const cookieName = '_user_tracker_id';
 
-var db = {};
-export default function getUserID(req, res, threshold) {
+var db;
+export default async function getUserID(req, res, threshold) {
+  if (!db) db = await loadDb();
   //https://www.npmjs.com/package/ua-parser-js
   //https://github.com/geoip-lite/node-geoip
   //https://stackoverflow.com/questions/17781472/how-to-get-a-subset-of-a-javascript-objects-properties
@@ -55,6 +57,8 @@ export default function getUserID(req, res, threshold) {
     signed: false, //sign the cookie
   });
 
+  await storeDb(db);
+
   return id;
 }
 
@@ -74,4 +78,21 @@ function genRandomHex(size) {
   return [...Array(size)]
     .map(() => Math.floor(Math.random() * 16).toString(16))
     .join('');
+}
+
+async function loadDb() {
+  //https://stackoverflow.com/questions/12899061/creating-a-file-only-if-it-doesnt-exist-in-node-js
+  await fs.writeFile(process.cwd() + '/db.json', '', {
+    flag: 'a+',
+  });
+  return JSON.parse(
+    (await fs.readFile(process.cwd() + '/db.json')).toString() || '{}'
+  );
+}
+
+async function storeDb(db) {
+  //https://stackoverflow.com/questions/12899061/creating-a-file-only-if-it-doesnt-exist-in-node-js
+  await fs.writeFile(process.cwd() + '/db.json', JSON.stringify(db), {
+    flag: 'w',
+  });
 }

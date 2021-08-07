@@ -42,7 +42,7 @@ export default function Home(props) {
 //https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
 import getUserID from '../components/getUserID';
 export async function getServerSideProps({ req, res }) {
-  var id = getUserID(req, res, 8);
+  var id = await getUserID(req, res, 8);
   return {
     props: { id: id },
   };
