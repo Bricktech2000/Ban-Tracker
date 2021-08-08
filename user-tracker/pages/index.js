@@ -8,9 +8,19 @@ export default function Home(props) {
   return (
     <div className={styles.Home}>
       <Head>
-        <title>User Tracker</title>
-        <meta name="description" content="" />
+        <meta charSet="UTF-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0"
+        />
+        <meta property="og:title" content="User Tracker" />
+        <meta property="og:description" content="Try and trick the server!" />
+        <meta property="og:image" content="/icon.png" />
         <link rel="icon" href="/icon.png" />
+
+        <title>User Tracker</title>
+        <meta name="description" content="Try and trick the server!" />
+        <meta name="theme-color" content="#000000" />
       </Head>
 
       <main>
