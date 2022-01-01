@@ -2,7 +2,8 @@ const next = require('next');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
-const port = 90;
+const argv = require('process').argv;
+const port = argv.length == 4 && argv[2] == '-p' ? argv[3] : 3000;
 const dev = process.env.NODE_ENV === 'development';
 
 const app = next({ dev });

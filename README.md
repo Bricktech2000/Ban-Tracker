@@ -15,10 +15,10 @@ To get started with this program, first run the development server:
 ```bash
 cd user-tracker/
 npm install
-npm run dev
+npm run dev -- -p 3000
 ```
 
-Then, navigate to [http://localhost:90](http://localhost:90) to see the live website.
+Then, navigate to [http://localhost:3000](http://localhost:3000) to see the live website.
 
 ## Deployment
 
@@ -28,7 +28,7 @@ To deploy the website, build the project and run the server:
 cd user-tracker/
 npm install
 npm run build
-npm start
+npm start -- -p 3000
 ```
 
-Then, navigate to [http://localhost:90](http://localhost:90) to see the live website.
+Then, navigate to [http://localhost:3000](http://localhost:3000) to see the live website.
