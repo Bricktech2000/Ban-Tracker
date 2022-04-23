@@ -26,7 +26,7 @@ export default function Home(props) {
       <main>
         <h1>User Tracker</h1>
         <div>
-          This program is ment to track users very aggressively without using
+          This program is meant to track users very aggressively without using
           any client-side logic. Your goal is to trick the server into assigning
           you a new <i>User ID</i>.
         </div>
