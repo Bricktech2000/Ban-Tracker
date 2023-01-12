@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 
 const cookieName = '_user_tracker_id';
 
-var db;
+let db;
 export default async function getUserID(req, res, threshold) {
   if (!db) db = await loadDb();
   //https://www.npmjs.com/package/ua-parser-js
@@ -13,33 +13,32 @@ export default async function getUserID(req, res, threshold) {
   //https://stackoverflow.com/questions/3393854/get-and-set-a-single-cookie-with-node-js-http-server
 
   //exclude: ua, engine, browser
-  var { ua, engine, browser, ...rest } = uaparser(req.headers['user-agent']);
+  let { _ua, engine, browser, ...rest } = uaparser(req.headers['user-agent']);
   //include: browser.name, browser.version
   browser = { name: browser.name, version: browser.version };
-  var ua = { ...rest, browser };
+  let ua = { ...rest, browser };
 
   //include: region, city, timezone, ll
-  var { region, city, timezone, ll, ...rest } =
+  let { region, city, timezone, ll, ..._rest } =
     geoip.lookup(req.connection.remoteAddress) || {};
-  var ip = { region, city, timezone, ll };
+  let ip = { region, city, timezone, ll };
 
   //include cookie (and double its weight)
-  var ck = {};
+  let ck = {};
   ck.ck1 = req.cookies[cookieName] || '';
   ck.ck2 = ck.ck1;
 
   //combine ip, ua and ck
-  var obj = { ua, ip, ck };
+  let obj = { ua, ip, ck };
 
-  var id = null;
-  var diff = Object.fromEntries(
+  let diff = Object.fromEntries(
     Object.entries(db).map(([key, objs]) => [
       key,
       Math.min(...objs.map((obj2) => compareValues(obj, obj2))),
     ])
   );
   //https://stackoverflow.com/questions/27376295/getting-key-with-the-highest-value-from-object
-  var id = Object.keys(diff).reduce(
+  let id = Object.keys(diff).reduce(
     (a, b) => (diff[a] < diff[b] ? a : b),
     null
   );

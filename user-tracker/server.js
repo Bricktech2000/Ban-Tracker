@@ -21,7 +21,7 @@ app.prepare().then(() => {
 
   server.listen(port, (err) => {
     if (err) throw err;
-    var host = 'localhost';
+    let host = 'localhost';
     console.log(`listening on ${host}:${port}\n`);
   });
 });
