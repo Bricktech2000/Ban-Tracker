@@ -10,8 +10,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /*https://stackoverflow.com/questions/11289166/chrome-on-android-resizes-font*/
-  max-height: 999999999px;
   -webkit-tap-highlight-color: transparent;
 }
 body {
