@@ -1,6 +1,6 @@
 # User Tracker
 
-An aggressive user tracker without any client-side logic
+_An aggressive user tracker without any client-side logic_
 
 ## Overview
 
